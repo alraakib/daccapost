@@ -1,6 +1,8 @@
 const getLatestNews = async () => {
   const response = await fetch(
-    `https://corsproxy.io/?url=${process.env.NEWS_URL}0/20`,
+    `https://api.rtvonline.com/api/story/view/latest?limit=5`,
+    // https://api.rtvonline.com/api/category/view/50/stories?page=0&size=10
+    // https://rtvonline.com/api/category/get-all?lang=bangla
   );
   const data = await response.json();
   return data;
