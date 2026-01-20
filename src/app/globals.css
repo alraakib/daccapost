@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Roboto", "Noto Serif Bengali", sans-serif;
+}
+
+body {
+  @apply text-gray-900 bg-gray-100;
+}
