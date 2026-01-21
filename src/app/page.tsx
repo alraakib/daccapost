@@ -1,5 +1,6 @@
 import Header from "@/components/header";
 import LatestNews from "@/components/latest";
+import Main from "@/components/main";
 import Opinions from "@/components/opinion";
 
 export default function Home() {
@@ -15,7 +16,9 @@ export default function Home() {
           <Opinions />
         </div>
         {/* Main Section */}
-        <div className="md:col-span-2 lg:col-span-4"></div>
+        <div className="md:col-span-2 lg:col-span-4">
+          <Main />
+        </div>
         {/* Right Sidebar */}
         <div className="lg:col-span-2"></div>
       </main>

@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${enFont.className} ${bnFont.className}`}>
+      <body className={`${enFont.className} ${bnFont.className} select-none`}>
         {children}
       </body>
     </html>
