@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
-export interface NewsResponse {
+export interface OpinionResponse {
   model: Model[];
   totalPages: number;
   currentPage: number;
@@ -25,9 +24,9 @@ export interface Model {
   isVideo: boolean;
 }
 
-const getLatestNews = async () => {
+const getOpinions = async () => {
   const response = await fetch(
-    `https://api.rtvonline.com/api/story/view/latest?page=1&size=5`,
+    `https://api.rtvonline.com/api/category/view/13/stories?page=0&size=10`,
     { cache: "force-cache", next: { revalidate: 60 } },
     // https://api.rtvonline.com/api/category/view/50/stories?page=0&size=10
     // https://rtvonline.com/api/category/get-all?lang=bangla
@@ -36,36 +35,25 @@ const getLatestNews = async () => {
   return data;
 };
 
-const LatestNews = async () => {
-  const news: NewsResponse = await getLatestNews();
+const Opinions = async () => {
+  const news: OpinionResponse = await getOpinions();
   console.log(news);
   return (
     <div className="p-5 bg-white shadow">
-      <h3 className="text-lg font-bold">সর্বশেষ</h3>
+      <h3 className="text-lg font-bold">মতামত</h3>
       <div className="flex gap-0">
         <div className="w-2/12 h-0.5 mt-2 mb-4 bg-black" />
         <div className="w-10/12 h-0.5 mt-2 mb-4 bg-gray-300" />
       </div>
-      <div className="grid gap-5">
+      <div className="grid divide-y">
         {news.model.map((item, index) => (
           <Link
             key={index}
             href={`/news/${item.id.toString()}`}
-            className="flex flex-col gap-2 group xl:flex-row"
+            className="flex gap-2 py-2 transition duration-300 hover:opacity-60"
           >
-            <div className="w-full xl:w-1/3 overflow-clip">
-              <Image
-                src={item.fileName}
-                alt={item.mainTitle}
-                className="object-cover h-auto transition duration-300 scale-110 scale group-hover:scale-125"
-                width={500}
-                height={500}
-              />
-            </div>
-
-            <h4 className="font-bold xl:w-2/3 group-hover:text-gray-600">
-              {item.mainTitle}
-            </h4>
+            <span className="text-[9px] mt-1">▶</span>
+            {item.mainTitle}
           </Link>
         ))}
       </div>
@@ -73,4 +61,4 @@ const LatestNews = async () => {
   );
 };
 
-export default LatestNews;
+export default Opinions;
