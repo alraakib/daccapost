@@ -38,7 +38,7 @@ const getLatestNews = async () => {
 
 const LatestNews = async () => {
   const news: NewsResponse = await getLatestNews();
-  console.log(news);
+
   return (
     <div className="p-5 bg-white shadow">
       <h3 className="text-lg font-bold">সর্বশেষ</h3>
@@ -47,23 +47,23 @@ const LatestNews = async () => {
         <div className="w-10/12 h-0.5 mt-2 mb-4 bg-gray-300" />
       </div>
       <div className="grid gap-5">
-        {news.model.map((item, index) => (
+        {news.model.map((item: Model) => (
           <Link
-            key={index}
+            key={item.id}
             href={`/news/${item.id.toString()}`}
-            className="flex flex-col gap-2 group xl:flex-row"
+            className="flex flex-col gap-3 group xl:flex-row"
           >
-            <div className="w-full xl:w-1/3 overflow-clip">
+            <div className="relative w-full overflow-hidden bg-gray-100 xl:w-1/3 aspect-video">
               <Image
                 src={item.fileName}
-                alt={item.mainTitle}
-                className="object-cover h-auto transition duration-300 scale-110 scale group-hover:scale-125"
-                width={500}
-                height={500}
+                alt={item.alt || item.mainTitle}
+                fill
+                className="object-cover transition duration-300 group-hover:scale-110"
+                loading="lazy"
               />
             </div>
 
-            <h4 className="font-bold xl:w-2/3 group-hover:text-gray-600">
+            <h4 className="font-bold leading-tight xl:w-2/3 group-hover:text-gray-600">
               {item.mainTitle}
             </h4>
           </Link>

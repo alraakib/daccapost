@@ -37,7 +37,7 @@ const getOpinions = async () => {
 
 const Opinions = async () => {
   const news: OpinionResponse = await getOpinions();
-  console.log(news);
+
   return (
     <div className="p-5 bg-white shadow">
       <h3 className="text-lg font-bold">মতামত</h3>
